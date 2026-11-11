@@ -8,7 +8,10 @@ C# Windows Forms ile yaptığım, uygulama penceresi içindeki klavye olayların
 - .NET 8
 
 ## Özellikler
-- Temel pencere ve arayüz tasarımı
+- Basılan tuşları algılama (KeyDown, KeyUp, KeyPress)
+- Son basılan tuşu ekranda gösterme
+- Tuş olaylarını saat bilgisiyle listeleme
+- Listedeki kayıtları temizleme butonu
 
 ## Çalıştırma
 Projeyi Visual Studio ile açıp F5'e basarak çalıştırabilirsiniz.
