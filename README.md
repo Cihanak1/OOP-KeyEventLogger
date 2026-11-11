@@ -12,6 +12,7 @@ C# Windows Forms ile yaptığım, uygulama penceresi içindeki klavye olayların
 - Son basılan tuşu ekranda gösterme
 - Tuş olaylarını saat bilgisiyle listeleme
 - Listedeki kayıtları temizleme butonu
+- Tuş kayıtlarını TXT dosyasına kaydetme
 
 ## Çalıştırma
 Projeyi Visual Studio ile açıp F5'e basarak çalıştırabilirsiniz.

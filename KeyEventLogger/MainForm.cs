@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace KeyEventLogger;
@@ -14,6 +15,7 @@ public partial class MainForm : Form
         KeyUp += MainForm_KeyUp;
         KeyPress += MainForm_KeyPress;
         btnClear.Click += btnClear_Click;
+        btnSave.Click += btnSave_Click;
     }
 
     private void MainForm_KeyDown(object? sender, KeyEventArgs e)
@@ -44,5 +46,45 @@ public partial class MainForm : Form
     {
         lstEvents.Items.Clear();
         lblLastKey.Text = "Son Basılan Tuş: (Temizlendi)";
+        lstEvents.Focus();
+    }
+
+    private void btnSave_Click(object? sender, EventArgs e)
+    {
+        if (lstEvents.Items.Count == 0)
+        {
+            MessageBox.Show("Kaydedilecek tuş kaydı bulunamadı.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            lstEvents.Focus();
+            return;
+        }
+
+        using (SaveFileDialog saveDialog = new SaveFileDialog())
+        {
+            saveDialog.Filter = "Metin Dosyası (*.txt)|*.txt";
+            saveDialog.Title = "Tuş Kayıtlarını Kaydet";
+            saveDialog.FileName = "tus_kayitlari.txt";
+
+            if (saveDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    using (StreamWriter writer = new StreamWriter(saveDialog.FileName))
+                    {
+                        foreach (var item in lstEvents.Items)
+                        {
+                            writer.WriteLine(item.ToString());
+                        }
+                    }
+
+                    MessageBox.Show("Kayıtlar kaydedildi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Dosya kaydedilemedi: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        lstEvents.Focus();
     }
 }
